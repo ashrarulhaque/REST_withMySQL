@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 1rem;
+        }
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f4f4f4;
+            cursor: pointer;
+        }
+        .datatable {
+            display: none;
+        }
+        .visible {
+            display: block;
+        }
+        .controls {
+            margin: 20px;
+        }
+        input {
+            padding: 8px;
+            margin: 5px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="controls">
+        <input type="text" id="searchInput" placeholder="Search data..." onkeyup="updateTable()" />
+    </div>
+    <h2>The total number of users is: <%= userCount %></h2>
+    <button class="showbtn">Show Data of all users</button>
+    <a href="http://localhost:8080/add"><button>Add User Data</button></a>
+    <table class="datatable">
+        <thead>
+            <th>Sn No.</th>
+            <th>ID</th>
+            <th>User Name</th>
+            <th>Email ID</th>
+            <th></th>
+            <th></th>
+        </thead>
+        <% for (user of users) { %>
+            <tr>
+                <td><%= user.Sn_No %></td>
+                <td><%= user.id %></td>
+                <td><%= user.username %></td>
+                <td><%= user.email %></td>
+                <td>
+                    <form action="/<%= user.id %>/edit">
+                        <button>Edit Username</button>
+                    </form>
+                </td>
+                <td>
+                    <form action="/<%= user.id %>/delete">
+                        <button id="deleteBtn">Delete</button>
+                    </form>
+                </td>
+            </tr>   
+        <% } %>
+    </table>
+    <form action=""></form>
+<script>
+    let showData = document.querySelector(".datatable");
+    let dataBtn = document.querySelector(".showbtn")
+    dataBtn.addEventListener("click", () => {
+        showData.classList.toggle("visible"); 
+        dataBtn.innerText = dataBtn.innerText === "Show Data of all users" ? "Hide Data of all users" : "Show Data of all users";
+    })
+</script>
+</body>
+</html>
