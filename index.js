@@ -28,7 +28,7 @@ const connection = mysql.createConnection({
   user: 'root',
   database: 'practice_app',
   multipleStatements: true,
-  password: 'Stupendous@0812'
+  password: ''
 });
 
 //Inserting fake data using package faker...
